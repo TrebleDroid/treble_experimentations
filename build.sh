@@ -15,7 +15,6 @@ aosp="android-13.0.0_r63"
 phh="android-13.0"
 
 build_target="$1"
-manifest_url="https://android.googlesource.com/platform/manifest"
 
 repo init -u "$manifest_url" -b $aosp --depth=1
 if [ -d .repo/local_manifests ] ;then
