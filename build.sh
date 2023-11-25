@@ -18,7 +18,7 @@ build_target="$1"
 manifest_url="https://android.googlesource.com/platform/manifest"
 
 if [ "$build_target" = "android-14.0" ];then
-    aosp="android-14.0.0_r14"
+    aosp="android-14.0.0_r15"
     phh="android-14.0"
 fi
 
