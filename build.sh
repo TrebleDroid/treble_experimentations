@@ -32,7 +32,7 @@ fi
 if [ "$build_target" = "android-16.0" ];then
     aosp="android-16.0.0_r2"
     phh="android-16.0"
-    supp="-bp1a"
+    supp="-bp2a"
 fi
 
 repo init -u "$manifest_url" -b $aosp --depth=1
