@@ -29,6 +29,12 @@ if [ "$build_target" = "android-15.0" ];then
     supp="-bp1a"
 fi
 
+if [ "$build_target" = "android-16.0" ];then
+    aosp="android-16.0.0_r2"
+    phh="android-16.0"
+    supp="-bp1a"
+fi
+
 repo init -u "$manifest_url" -b $aosp --depth=1
 if [ -d .repo/local_manifests ] ;then
 	( cd .repo/local_manifests; git fetch; git reset --hard; git checkout origin/$phh)
