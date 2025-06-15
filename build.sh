@@ -30,7 +30,7 @@ if [ "$build_target" = "android-15.0" ];then
 fi
 
 if [ "$build_target" = "android-16.0" ];then
-    aosp="android-16.0.0_r2"
+    aosp="android-16.0.0_r1"
     phh="android-16.0"
     supp="-bp2a"
 fi
