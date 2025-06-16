@@ -29,6 +29,12 @@ if [ "$build_target" = "android-15.0" ];then
     supp="-bp1a"
 fi
 
+if [ "$build_target" = "android-16.0" ];then
+    aosp="android-16.0.0_r2"
+    phh="android-16.0"
+    supp="-bp2a"
+fi
+
 repo init -u "$manifest_url" -b $aosp --depth=1
 if [ -d .repo/local_manifests ] ;then
 	( cd .repo/local_manifests; git fetch; git reset --hard; git checkout origin/$phh)
@@ -53,15 +59,22 @@ repo manifest -r > release/$rom_fp/manifest.xml
 bash "$originFolder"/list-patches.sh
 cp patches.zip release/$rom_fp/patches-for-developers.zip
 
-(
-    git clone https://github.com/TrebleDroid/sas-creator
-    cd sas-creator
+if [ "$build_target" = "android-16.0" ];then
+    buildVariant treble_arm64_bvS$supp-userdebug td-arm64-vanilla
+    buildVariant treble_arm64_byS$supp-userdebug td-arm64-vanilla-old
+    buildVariant treble_a64_bvS$supp-userdebug td-arm32_binder64-vanilla
+    buildVariant treble_a64_byS$supp-userdebug td-arm32_binder64-vanilla-old
+else
+    (
+        git clone https://github.com/TrebleDroid/sas-creator
+        cd sas-creator
 
-    git clone https://github.com/phhusson/vendor_vndk -b android-10.0
-)
+        git clone https://github.com/phhusson/vendor_vndk -b android-10.0
+    )
 
-buildVariant treble_arm64_bvS$supp-userdebug td-arm64-ab-vanilla
-( cd sas-creator; bash lite-adapter.sh 64; xz -c s.img -T0 > ../release/$rom_fp/system-td-arm64-ab-vndklite-vanilla.img.xz )
+    buildVariant treble_arm64_bvS$supp-userdebug td-arm64-ab-vanilla
+    ( cd sas-creator; bash lite-adapter.sh 64; xz -c s.img -T0 > ../release/$rom_fp/system-td-arm64-ab-vndklite-vanilla.img.xz )
 
-buildVariant treble_a64_bvS$supp-userdebug td-arm32_binder64-ab-vanilla
-( cd sas-creator; bash lite-adapter.sh 32; xz -c s.img -T0 > ../release/$rom_fp/system-td-arm32_binder64-ab-vndklite-vanilla.img.xz )
+    buildVariant treble_a64_bvS$supp-userdebug td-arm32_binder64-ab-vanilla
+    ( cd sas-creator; bash lite-adapter.sh 32; xz -c s.img -T0 > ../release/$rom)
+fi
