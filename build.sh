@@ -15,7 +15,6 @@ aosp="android-13.0.0_r73"
 phh="android-13.0"
 
 build_target="$1"
-manifest_url="https://android.googlesource.com/platform/manifest"
 
 if [ "$build_target" = "android-14.0" ];then
     aosp="android-14.0.0_r37"
