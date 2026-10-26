@@ -35,13 +35,19 @@ fi
 #We don't want to replace from AOSP since we'll be applying patches by hand
 rm -f .repo/local_manifests/replace.xml
 if [ "$rom" == "carbon" ];then
-	repo init -u https://github.com/CarbonROM/android -b cr-6.1
-elif [ "$rom" == "lineage15" ];then
-	repo init -u https://github.com/LineageOS/android.git -b lineage-15.1
-elif [ "$rom" == "lineage16" ];then
-	repo init -u https://github.com/LineageOS/android.git -b lineage-16.0
+	repo init -u https://github.com/CarbonROM/android -b cr-11.0
+elif [ "$rom" == "lineage24" ];then
+	repo init -u https://github.com/LineageOS/android.git -b lineage-24.0
 elif [ "$rom" == "rr" ];then
-	repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b pie
+	repo init -u https://github.com/ResurrectionRemix/platform_manifest.git -b Q
+elif [ "$rom" == "komodo" ];then
+	repo init -u https://github.com/komodo-os/platform_manifest.git -b 15
+elif [ "$rom" == "havoc" ];then
+	repo init -u https://github.com/havoc-os/platform_manifest.git -b thirteen
+elif [ "$rom" == "graphene" ];then
+	repo init -u https://github.com/GrapheneOS/platform_manifest -b 17
+elif [ "$rom" == "eelo" ];then
+	repo init -u https://gitlab.e.foundation/e/os/android.git -b a17
 fi
 
 if [ -d .repo/local_manifests ] ;then
